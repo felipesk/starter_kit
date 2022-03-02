@@ -3,6 +3,22 @@ import logo from '../logo.png';
 import './App.css';
 
 class App extends Component {
+  async componentWillMount() {
+    await this.loadWeb3()
+    await this.loadBlockchainData()
+  }
+
+  async loadWeb3() {
+    if (!window.ethereum) {
+      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    }
+  }
+
+  async loadBlockchainData(){
+    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+    console.log(accounts)
+  }
+
   render() {
     return (
       <div>
@@ -13,7 +29,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Dapp University
+            Dapp University Blockchain Marketplace
           </a>
         </nav>
         <div className="container-fluid mt-5">
